@@ -1,0 +1,19 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz Tempo</title>
+<style>body{font-family:system-ui,sans-serif;max-width:680px;margin:48px auto;padding:0 16px;line-height:1.5}
+code{background:#f1f1f4;padding:10px 12px;border-radius:8px;display:block;word-break:break-all;font-size:14px;margin:8px 0}
+button{padding:9px 16px;border:0;border-radius:8px;background:#111;color:#fff;font-size:14px;cursor:pointer}
+.ok{color:#0a7d28}.err{color:#b00020}</style></head>
+<body>
+<h1>Quiz Tempo</h1>
+<div id="out"><p>OAuth callback catcher.</p></div>
+<script>
+const p=new URLSearchParams(location.search),out=document.getElementById('out');
+const code=p.get('code'),state=p.get('state'),err=p.get('error');
+if(code){out.innerHTML='<p class=ok><b>Code d’autorisation reçu</b> — copie-le :</p><code id=c>'+code+'</code>'+
+'<button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent);this.textContent=\'✓ Copié\'">Copier le code</button>'+
+(state?'<p style=color:#888>state: '+state+'</p>':'');}
+else if(err){out.innerHTML='<p class=err>Erreur: '+err+' — '+(p.get('error_description')||'')+'</p>';}
+</script>
+</body></html>
